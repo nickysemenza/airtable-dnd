@@ -21,6 +21,8 @@ export interface FieldSet<T extends string = string> {
   [key: string]: FieldSetValue<T>;
 }
 
+export { Field };
+
 export type FieldSetValue<T extends string = string> =
   | undefined
   | string
