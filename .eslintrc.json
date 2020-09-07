@@ -1,0 +1,54 @@
+{
+  "extends": [
+    "prettier",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "react"
+  ],
+  "root": true,
+  "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": [
+      "off"
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "mjs": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "off"
+    ]
+  },
+  "settings": {
+    "import/extensions": [
+      ".js",
+      ".ts",
+      ".mjs"
+    ],
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".ts",
+          ".json"
+        ]
+      },
+      "typescript": {}
+    }
+  }
+}
