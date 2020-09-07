@@ -202,7 +202,10 @@ export class Airtable {
     options?: RecordOptions,
   ): Promise<TableRecords<T>>;
 
-  create<T extends FieldSet>(data: T | T[], options: RecordOptions = {}) {
+  create<T extends FieldSet>(
+    data: T | T[],
+    options: RecordOptions = {},
+  ): Promise<TableRecord<T>> | Promise<TableRecords<T>> {
     if (data instanceof Array) {
       return this.jsonRequest<TableRecords<T>>({
         url: this.getRequestUrl(),
@@ -281,7 +284,7 @@ export class Airtable {
     idOrRecords: string | TableRecord<T>[],
     record?: T | RecordOptions,
     options?: RecordOptions,
-  ) {
+  ): Promise<TableRecord<T>> | Promise<TableRecords<T>> {
     if (typeof idOrRecords === "string") {
       const id = idOrRecords;
       const fields = record;
@@ -358,7 +361,7 @@ export class Airtable {
     idOrRecords: string | TableRecord<T>[],
     record?: T | RecordOptions,
     options?: RecordOptions,
-  ) {
+  ): Promise<TableRecord<T>> | Promise<TableRecords<T>> {
     if (typeof idOrRecords === "string") {
       const id = idOrRecords;
       const fields = record;
@@ -407,7 +410,7 @@ export class Airtable {
    */
   delete(ids: string[]): Promise<DeletedRecords>;
 
-  delete(ids: string | string[]) {
+  delete(ids: string | string[]): Promise<DeletedRecord | DeletedRecords> {
     return this.request<DeletedRecord | DeletedRecords>({
       url: this.getRequestUrl({}, Array.isArray(ids) ? "" : ids),
       method: "DELETE",
@@ -427,9 +430,10 @@ export class Airtable {
   }
 
   private getRequestUrl(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     query: Record<string, any> = {},
     ...segments: string[]
-  ) {
+  ): string {
     const { apiKey, endpointUrl, baseId, tableName } = this.options;
 
     if (!apiKey) {
@@ -459,7 +463,7 @@ export class Airtable {
     const urlSegments = [
       endpointUrl,
       baseId,
-      encodeURIComponent(tableName!),
+      encodeURIComponent(tableName),
       ...segments,
       ...(hasAnyKey(query) ? ["?", stringify(query)] : []),
     ];
@@ -495,7 +499,7 @@ export class Airtable {
     headers,
     jsonBody,
     ...options
-  }: AirtableRequestOptions) {
+  }: AirtableRequestOptions): Promise<T> {
     return this.request<T>({
       headers: {
         ...headers,
@@ -511,7 +515,9 @@ export class Airtable {
     data,
     replace,
     options,
-  }: UpdateOrReplaceOptions<T>) {
+  }: UpdateOrReplaceOptions<T>):
+    | Promise<TableRecord<T>>
+    | Promise<TableRecords<T>> {
     const method = replace ? "PUT" : "PATCH";
 
     if (typeof id === "string") {

@@ -13,6 +13,7 @@ export interface AirtableOptions {
 
 export interface AirtableRequestOptions extends RequestInit {
   url: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   jsonBody?: any;
 }
 
