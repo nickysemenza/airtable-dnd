@@ -43,14 +43,15 @@ export class Airtable {
    * @memberof Airtable
    */
   constructor(options: AirtableOptions = {}) {
+    const d = Airtable.defaultOptions;
     this.options = {
-      ...Airtable.defaultOptions,
+      ...d,
       ...(options.useEnv
         ? {
-            apiKey: process.env.AIRTABLE_API_KEY,
-            endpointUrl: process.env.AIRTABLE_ENDPOINT_URL,
-            baseId: process.env.AIRTABLE_BASE_ID,
-            tableName: process.env.AIRTABLE_TABLE_NAME,
+            apiKey: process.env.AIRTABLE_API_KEY || d.apiKey,
+            endpointUrl: process.env.AIRTABLE_ENDPOINT_URL || d.endpointUrl,
+            baseId: process.env.AIRTABLE_BASE_ID || d.baseId,
+            tableName: process.env.AIRTABLE_TABLE_NAME || d.tableName,
           }
         : {}),
       ...options,
