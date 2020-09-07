@@ -48,8 +48,8 @@ export type FieldSetValue<T extends string = string> =
   | Field.Duration
   | Field.Rating;
 
-export interface SelectOptions<T extends string | number | symbol> {
-  fields?: T[];
+export interface SelectOptions<T extends FieldSet> {
+  fields?: (keyof T)[];
   filterByFormula?: string;
   maxRecords?: number;
   pageSize?: number;

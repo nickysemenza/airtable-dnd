@@ -131,7 +131,7 @@ export class Airtable {
    * @memberof Airtable
    */
   select<T extends FieldSet>(
-    options: SelectOptions<keyof T> = {},
+    options: SelectOptions<T> = {},
   ): Promise<SelectResult<T>> {
     return this.request<SelectResult<T>>({
       url: this.getRequestUrl(options),
