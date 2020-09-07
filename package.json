@@ -1,7 +1,7 @@
 {
   "name": "airtable-dnd",
   "description": "Unofficial Airtable Client for Node.js ported from `airtable-deno` 🦕",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "repository": "https://github.com/grikomsn/airtable-dnd.git",
   "author": "Griko Nibras <git@griko.id>",
   "main": "dist/index.js",
