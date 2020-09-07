@@ -1,4 +1,5 @@
 export namespace Field {
+  export type RecordLink = string[];
   export type SingleLineText = string;
   export type LongText = string;
   export type Checkbox = boolean;
@@ -57,8 +58,10 @@ export interface FieldSet<T extends string = string> {
   [key: string]:
     | undefined
     | string
+    | string[]
     | number
     | boolean
+    | Field.RecordLink
     | Field.SingleLineText
     | Field.LongText
     | Field.Checkbox
