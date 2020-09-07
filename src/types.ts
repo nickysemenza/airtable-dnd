@@ -55,31 +55,33 @@ export interface AirtableRequestOptions extends RequestInit {
 }
 
 export interface FieldSet<T extends string = string> {
-  [key: string]:
-    | undefined
-    | string
-    | string[]
-    | number
-    | boolean
-    | Field.RecordLink
-    | Field.SingleLineText
-    | Field.LongText
-    | Field.Checkbox
-    | Field.MultipleSelect<T>
-    | Field.SingleSelect<T>
-    | Field.Collaborator
-    | Field.Collaborators
-    | Field.Attachment[]
-    | Field.DateType
-    | Field.PhoneNumber
-    | Field.Email
-    | Field.URL
-    | Field.Number
-    | Field.Currency
-    | Field.Percent
-    | Field.Duration
-    | Field.Rating;
+  [key: string]: FieldSetValue<T>;
 }
+
+export type FieldSetValue<T extends string = string> =
+  | undefined
+  | string
+  | string[]
+  | number
+  | boolean
+  | Field.RecordLink
+  | Field.SingleLineText
+  | Field.LongText
+  | Field.Checkbox
+  | Field.MultipleSelect<T>
+  | Field.SingleSelect<T>
+  | Field.Collaborator
+  | Field.Collaborators
+  | Field.Attachment[]
+  | Field.DateType
+  | Field.PhoneNumber
+  | Field.Email
+  | Field.URL
+  | Field.Number
+  | Field.Currency
+  | Field.Percent
+  | Field.Duration
+  | Field.Rating;
 
 export interface SelectOptions<T extends string | number | symbol> {
   fields?: T[];
