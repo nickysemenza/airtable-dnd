@@ -13,7 +13,7 @@ import {
 
 import { AirtableError } from "./error";
 import { hasAnyKey } from "./utils";
-import { stringify } from "querystring";
+import { stringify } from "qs";
 
 /**
  * Unofficial Airtable Client for Node.js ported from `airtable-deno`
@@ -466,7 +466,7 @@ export class Airtable {
       baseId,
       encodeURIComponent(tableName),
       ...segments,
-      ...(hasAnyKey(query) ? ["?", stringify(query)] : []),
+      ...(hasAnyKey(query) ? [`?${stringify(query)}`] : []),
     ];
 
     return urlSegments.join("/");
